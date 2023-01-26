@@ -9,5 +9,22 @@ export function Leaf({ attributes, children, leaf }: RenderLeafProps) {
       </strong>
     );
   }
+
+  if (leaf.italic) {
+    return (
+      <em className="italic" {...attributes}>
+        {children}
+      </em>
+    );
+  }
+
+  if (leaf.underline) {
+    return (
+      <u className="underline" {...attributes}>
+        {children}
+      </u>
+    );
+  }
+
   return <span {...attributes}>{children}</span>;
 }
