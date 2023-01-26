@@ -2,6 +2,10 @@
 
 > Playing around with SlateJS!
 
+## Environments
+
+- **Development:** <https://slatejs-playground-eight.vercel.app/>
+
 ## Developing
 
 A nodejs >= 14.0.0 setup with [yarn](https://yarnpkg.com/) is recommended.
