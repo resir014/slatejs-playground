@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import * as React from 'react';
+import * as Toggle from '@radix-ui/react-toggle';
 import { useSlate } from 'slate-react';
 import { FontBoldIcon, FontItalicIcon, UnderlineIcon, HeadingIcon } from '@radix-ui/react-icons';
 import {
@@ -20,11 +21,11 @@ export function Toolbar() {
   return (
     <div className="px-4 py-2 rounded-xl bg-white shadow-lg">
       <div className="space-x-2">
-        <button
+        <Toggle.Root
           aria-label="Bold"
           type="button"
-          onClick={e => {
-            e.preventDefault();
+          pressed={isBoldActive}
+          onPressedChange={() => {
             transformText(editor, 'bold');
           }}
           className={clsx(
@@ -35,12 +36,12 @@ export function Toolbar() {
           )}
         >
           <FontBoldIcon />
-        </button>
-        <button
+        </Toggle.Root>
+        <Toggle.Root
           aria-label="Italic"
           type="button"
-          onClick={e => {
-            e.preventDefault();
+          pressed={isItalicActive}
+          onPressedChange={() => {
             transformText(editor, 'italic');
           }}
           className={clsx(
@@ -51,12 +52,12 @@ export function Toolbar() {
           )}
         >
           <FontItalicIcon />
-        </button>
-        <button
+        </Toggle.Root>
+        <Toggle.Root
           aria-label="Underline"
           type="button"
-          onClick={e => {
-            e.preventDefault();
+          pressed={isUnderlineActive}
+          onPressedChange={() => {
             transformText(editor, 'underline');
           }}
           className={clsx(
@@ -67,11 +68,11 @@ export function Toolbar() {
           )}
         >
           <UnderlineIcon />
-        </button>
-        <button
+        </Toggle.Root>
+        <Toggle.Root
           aria-label="Heading"
-          onClick={e => {
-            e.preventDefault();
+          pressed={isHeadingActive}
+          onPressedChange={() => {
             transformText(editor, 'heading');
           }}
           className={clsx(
@@ -82,7 +83,7 @@ export function Toolbar() {
           )}
         >
           <HeadingIcon />
-        </button>
+        </Toggle.Root>
       </div>
     </div>
   );
