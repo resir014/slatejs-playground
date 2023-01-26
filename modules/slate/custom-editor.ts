@@ -35,6 +35,23 @@ export function isHeadingBlockActive(editor: CustomEditor) {
   return !!match;
 }
 
+export function isMatchResultBlockActive(editor: CustomEditor) {
+  const { selection } = editor;
+
+  if (!selection) {
+    return false;
+  }
+
+  const [match] = Array.from(
+    Editor.nodes(editor, {
+      at: Editor.unhangRange(editor, selection),
+      match: (n: any) => !Editor.isEditor(n) && Element.isElement(n) && n.type === 'match-result',
+    })
+  );
+
+  return !!match;
+}
+
 export function toggleBoldMark(editor: CustomEditor) {
   const isActive = isBoldMarkActive(editor);
 
@@ -75,6 +92,16 @@ export function toggleHeadingBlock(editor: CustomEditor) {
   );
 }
 
+export function toggleMatchResultBlock(editor: CustomEditor) {
+  const isActive = isMatchResultBlockActive(editor);
+
+  Transforms.setNodes(
+    editor,
+    { type: isActive ? 'paragraph' : 'match-result' },
+    { match: n => Editor.isBlock(editor, n) }
+  );
+}
+
 export function transformText(editor: CustomEditor, transformer?: string) {
   switch (transformer) {
     case 'bold': {
@@ -87,6 +114,10 @@ export function transformText(editor: CustomEditor, transformer?: string) {
     }
     case 'underline': {
       toggleUnderlineMark(editor);
+      break;
+    }
+    case 'match-result': {
+      toggleMatchResultBlock(editor);
       break;
     }
     case 'heading': {

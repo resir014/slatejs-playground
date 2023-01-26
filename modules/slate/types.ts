@@ -13,7 +13,12 @@ export type HeadingElement = {
   children: CustomText[];
 };
 
-export type CustomElement = ParagraphElement | HeadingElement;
+export type MatchResultElement = {
+  type: 'match-result';
+  children: CustomText[];
+};
+
+export type CustomElement = ParagraphElement | HeadingElement | MatchResultElement;
 
 export type CustomTypes = CustomElement['type'];
 

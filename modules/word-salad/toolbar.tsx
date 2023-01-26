@@ -2,11 +2,18 @@ import clsx from 'clsx';
 import * as React from 'react';
 import * as Toggle from '@radix-ui/react-toggle';
 import { useSlate } from 'slate-react';
-import { FontBoldIcon, FontItalicIcon, UnderlineIcon, HeadingIcon } from '@radix-ui/react-icons';
+import {
+  FontBoldIcon,
+  FontItalicIcon,
+  UnderlineIcon,
+  HeadingIcon,
+  MixIcon,
+} from '@radix-ui/react-icons';
 import {
   isBoldMarkActive,
   isHeadingBlockActive,
   isItalicMarkActive,
+  isMatchResultBlockActive,
   isUnderlineMarkActive,
   transformText,
 } from '../slate/custom-editor';
@@ -17,6 +24,7 @@ export function Toolbar() {
   const isItalicActive = isItalicMarkActive(editor);
   const isUnderlineActive = isUnderlineMarkActive(editor);
   const isHeadingActive = isHeadingBlockActive(editor);
+  const isMatchResultActive = isMatchResultBlockActive(editor);
 
   return (
     <div className="px-4 py-2 rounded-xl bg-white shadow-lg">
@@ -83,6 +91,21 @@ export function Toolbar() {
           )}
         >
           <HeadingIcon />
+        </Toggle.Root>
+        <Toggle.Root
+          aria-label="Match Result Block"
+          pressed={isMatchResultActive}
+          onPressedChange={() => {
+            transformText(editor, 'match-result');
+          }}
+          className={clsx(
+            'relative z-10 inline-flex items-center justify-center rounded-md border  p-1 w-10 h-10 text-sm font-medium  focus:z-20',
+            isMatchResultActive
+              ? 'border-indigo-500 bg-indigo-50 text-indigo-600'
+              : 'border-gray-300 bg-white text-gray-500 hover:bg-gray-50'
+          )}
+        >
+          <MixIcon />
         </Toggle.Root>
       </div>
     </div>

@@ -11,6 +11,7 @@ import { ParagraphElement } from '../slate/renderers/elements/paragraph-element'
 import { textEditorHotkeys } from '../slate/hotkeys';
 import { HeadingElement } from '../slate/renderers/elements/heading-element';
 import { transformText } from '../slate/custom-editor';
+import { MatchResultElement } from '../slate/renderers/elements/match-result-element';
 import { Toolbar } from './toolbar';
 
 declare module 'slate' {
@@ -23,8 +24,16 @@ declare module 'slate' {
 
 const initialValue: Descendant[] = [
   {
+    type: 'heading',
+    children: [{ text: 'Word Salad demo' }],
+  },
+  {
     type: 'paragraph',
     children: [{ text: 'Write down your hot takes here...' }],
+  },
+  {
+    type: 'match-result',
+    children: [{ text: 'Into the Breach 4 - 2 Alliance' }],
   },
 ];
 
@@ -39,6 +48,9 @@ export function RichTextEditor() {
       }
       case 'paragraph': {
         return <ParagraphElement {...props} />;
+      }
+      case 'match-result': {
+        return <MatchResultElement {...props} />;
       }
       default: {
         return <ParagraphElement {...props} />;
